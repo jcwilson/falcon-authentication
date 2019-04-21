@@ -5,6 +5,7 @@ from __future__ import division
 
 import base64
 from datetime import timedelta, datetime
+from functools import partial
 
 import falcon
 
@@ -59,16 +60,17 @@ class AuthBackend(object):
 
     Args:
         user_loader(function, required): A callback function that is called with the
-            decoded `token` extracted from the `Authorization`
-            header. Returns an `authenticated user` if user exists matching the
-            credentials or return `None` to indicate if no user found or credentials
-            mismatch.
+            falcon req, resp and resource objects as well as any relevant data from
+            the extracted from the `Authorization` header. It should return the user
+            object identified from the `Authorization` header, or `None` if the user
+            is not found. The arguments passed to `user_loader` will vary depending
+            on the AuthBackend type.
     """
 
     def __init__(self, user_loader):
         self.user_loader = user_loader
 
-    def load_user(self, *args, **kwargs):
+    def load_user(self, req, resp, resource, *args, **kwargs):
         """
         Invoke the provided `user_loader()` function to allow the app to retrieve
         the user record. If no such record is found, raise a `BackendNotApplicable`
@@ -79,7 +81,7 @@ class AuthBackend(object):
         somehow. We wouldn't want to preclude another AuthBackend of the same type
         from attempting authentication.
         """
-        user = self.user_loader(*args, **kwargs)
+        user = self.user_loader(req, resp, resource, *args, **kwargs)
         if not user:
             # We raise the less severe "not applicable" error here to allow other
             # AuthBackends a shot (if any). It will still result in a 401 if no
@@ -165,7 +167,7 @@ class NoneAuthBackend(AuthBackend):
 
     def authenticate(self, req, resp, resource):
         return {
-            'user': self.load_user(),
+            'user': self.load_user(req, resp, resource),
         }
 
 
@@ -223,7 +225,7 @@ class BasicAuthBackend(AuthBackend):
         """
         username, password = self._extract_credentials(req)
         return {
-            'user': self.load_user(username, password),
+            'user': self.load_user(req, resp, resource, username, password),
         }
 
     def get_auth_token(self, user_payload):
@@ -277,7 +279,7 @@ class TokenAuthBackend(BasicAuthBackend):
     def authenticate(self, req, resp, resource):
         token = self._extract_credentials(req)
         return {
-            'user': self.load_user(token),
+            'user': self.load_user(req, resp, resource, token),
         }
 
     def get_auth_token(self, user_payload):
@@ -405,7 +407,7 @@ class JWTAuthBackend(AuthBackend):
         """
         payload = self._decode_jwt_token(req)
         return {
-            'user': self.load_user(payload),
+            'user': self.load_user(req, resp, resource, payload),
         }
 
     def get_auth_token(self, user_payload):
@@ -497,7 +499,7 @@ class HawkAuthBackend(AuthBackend):
 
         return auth_header
 
-    def credentials_map(self, user_id):
+    def credentials_map(self, req, resp, resource, user_id):
         """
         Look up the user from the application and allow the application to extract/generate
         Hawk credentials from the user object. It then drops the user object into the
@@ -505,8 +507,8 @@ class HawkAuthBackend(AuthBackend):
         succeeds (we want to avoid another round trip to the backing datastore to get the user
         again).
         """
-        user = self.load_user(user_id)
-        credentials = self.load_credentials(user)
+        user = self.load_user(req, resp, resource, user_id)
+        credentials = self.load_credentials(req, resp, resource, user)
         credentials['user'] = user
         return credentials
 
@@ -517,7 +519,7 @@ class HawkAuthBackend(AuthBackend):
             # Validate the Authorization header contents and lookup the user's credentials
             # via the provided `credentials_map` function.
             receiver = mohawk.Receiver(
-                credentials_map=self.credentials_map,
+                credentials_map=partial(self.credentials_map, req, resp, resource),
                 request_header=request_header,
                 method=req.method,
                 url=req.forwarded_uri,

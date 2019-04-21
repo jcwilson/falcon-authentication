@@ -101,7 +101,7 @@ def get_basic_auth_token(username, password, prefix='Basic'):
 
 @pytest.fixture(scope='function')
 def basic_auth_backend(user):
-    def user_loader(username, password):
+    def user_loader(req, resp, resource, username, password):
         if user.username == username and user.password == password:
             return user
         return None
@@ -122,7 +122,7 @@ class BasicAuthFixture:
 
 @pytest.fixture(scope='function')
 def token_backend(user):
-    def user_loader(token):
+    def user_loader(req, resp, resource, token):
         if user.token == token:
             return user
         return None
@@ -152,7 +152,7 @@ def secret_key():
 
 @pytest.fixture(scope='function')
 def jwt_backend(user):
-    def user_loader(payload):
+    def user_loader(req, resp, resource, payload):
         if user.id == payload['user']['id']:
             return user
         return None
@@ -191,15 +191,15 @@ class JWTAuthFixture:
 
 @pytest.fixture(scope='function')
 def hawk_backend(user):
-    def user_loader(username):
-        # Our backend will only know about the one user
-        creds = {
-            user.username: user,
-        }
+    # Our backend will only know about the one user
+    creds = {
+        user.username: user,
+    }
 
+    def user_loader(req, resp, resource, username):
         return creds.get(username)
 
-    def credentials_loader(user):
+    def credentials_loader(req, resp, resource, user):
         return {
             'id': user.username,
             'key': user.password,
@@ -241,7 +241,7 @@ class HawkAuthFixture:
 
 @pytest.fixture(scope='function')
 def none_backend(none_user):
-    return NoneAuthBackend(lambda: none_user)
+    return NoneAuthBackend(lambda req, resp, resource: none_user)
 
 
 class NoneAuthFixture:
