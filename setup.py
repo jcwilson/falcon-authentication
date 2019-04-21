@@ -5,7 +5,7 @@ import os
 import sys
 from setuptools import setup
 
-version = '3.0.0'
+version = '3.0.0.rc.1'
 
 if sys.argv[-1] == 'tag':
     os.system("git tag -a %s -m 'version %s'" % (version, version))
@@ -70,7 +70,6 @@ setup(
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
-        "Framework :: Falcon",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
