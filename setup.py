@@ -37,9 +37,9 @@ needs_pytest = any(arg in ['pytest', 'test', 'ptr'] for arg in sys.argv)
 setup_requires = ['pytest-runner'] if needs_pytest else []
 
 setup(
-    author='Ritesh Kadmawala',
-    author_email='ritesh@loanzen.in',
-    description='falcon-auth',
+    author='Josh Wilson',
+    author_email='josh.wilson@fivestars.com',
+    description='falcon-authentication',
     download_url='',
     setup_requires=setup_requires,
     install_requires=[
@@ -50,9 +50,9 @@ setup(
         'backend-jwt': ['pyjwt>=1.7.1,<2.0.0']
     },
     license='MIT',
-    name='falcon-auth',
+    name='falcon-authentication',
     packages=[
-        'falcon_auth',
+        'falcon_authentication',
     ],
     scripts=[],
     test_suite='tests',
@@ -65,7 +65,7 @@ setup(
         'tox>=2.3.1,<3.0.0',
         'python-coveralls>=2.9.1,<3.0.0'
     ],
-    url='https://github.com/loanzen/falcon-auth',
+    url='https://github.com/jcwilson/falcon-authentication',
     version=version,
     classifiers=[
         "Development Status :: 5 - Production/Stable",

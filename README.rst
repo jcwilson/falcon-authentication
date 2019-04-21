@@ -1,4 +1,4 @@
-falcon-auth
+falcon-authentication
 ===========
 
 |version| |docs| |build| |coverage| |license|
@@ -13,13 +13,13 @@ Install the extension with pip, or easy\_install.
 
 .. code:: bash
 
-    $ pip install -U falcon-auth
+    $ pip install -U falcon-authentication
 
 If you wish to use the optional backends, specify those dependencies, too.
 
 .. code:: bash
 
-    $ pip install -U falcon-auth[backend-hawk,backend-jwt]
+    $ pip install -U falcon-authentication[backend-hawk,backend-jwt]
 
 Usage
 -----
@@ -33,7 +33,7 @@ user to the ``request context``
 .. code:: python
 
     import falcon
-    from falcon_auth import FalconAuthMiddleware, BasicAuthBackend
+    from falcon_authentication import FalconAuthMiddleware, BasicAuthBackend
 
     user_loader = lambda req, resp, resource, username, password: { 'username': username }
     auth_backend = BasicAuthBackend(user_loader)
@@ -72,7 +72,7 @@ authentication backend on a per resource basis as well
 .. code:: python
 
     import falcon
-    from falcon_auth import FalconAuthMiddleware, BasicAuthBackend, TokenAuthBackend
+    from falcon_authentication import FalconAuthMiddleware, BasicAuthBackend, TokenAuthBackend
 
     # a loader function to fetch user from username, password
     user_loader = lambda req, resp, resource, username, password: { 'username': username }
@@ -170,7 +170,7 @@ If you wish to use this backend, be sure to add the optional dependency to your 
 
 .. code:: text
 
-    falcon-auth[backend-jwt]
+    falcon-authentication[backend-jwt]
 
 
 + **Hawk Authentication (Python 2.6+, 3.4+)**
@@ -181,7 +181,7 @@ If you wish to use this backend, be sure to add the optional dependency to your 
 
 .. code:: text
 
-    falcon-auth[backend-hawk]
+    falcon-authentication[backend-hawk]
 
 This backend will also provide the ``mohawk.Receiver`` object in the ``req.context['auth']``
 result under the 'receiver' key.
@@ -237,47 +237,47 @@ Tests
 This library comes with a good set of tests which are included in ``tests/``. To run
 install ``pytest`` and simply invoke ``py.test`` or ``python setup.py test``
 to exercise the tests. You can check the test coverage by running
-``py.test --cov falcon_auth``. **Note:** The test suite makes use of pytest functionality
+``py.test --cov falcon_authentication``. **Note:** The test suite makes use of pytest functionality
 that was deprecated in pytest==4.0.0, so be sure to run tests in an environment that
 uses a prior version.
 
 API
 ----
-.. autoclass:: falcon_auth.FalconAuthMiddleware
+.. autoclass:: falcon_authentication.FalconAuthMiddleware
     :members:
 
-.. autoclass:: falcon_auth.BasicAuthBackend
+.. autoclass:: falcon_authentication.BasicAuthBackend
     :members:
 
-.. autoclass:: falcon_auth.TokenAuthBackend
+.. autoclass:: falcon_authentication.TokenAuthBackend
     :members:
 
-.. autoclass:: falcon_auth.JWTAuthBackend
+.. autoclass:: falcon_authentication.JWTAuthBackend
     :members:
 
-.. autoclass:: falcon_auth.HawkAuthBackend
+.. autoclass:: falcon_authentication.HawkAuthBackend
     :members:
 
-.. autoclass:: falcon_auth.NoneAuthBackend
+.. autoclass:: falcon_authentication.NoneAuthBackend
     :members:
 
-.. autoclass:: falcon_auth.MultiAuthBackend
+.. autoclass:: falcon_authentication.MultiAuthBackend
     :members:
 
 
 .. |docs| image:: https://readthedocs.org/projects/docs/badge/?version=latest
     :alt: Documentation Status
     :scale: 100%
-    :target: https://falcon-auth.readthedocs.io/en/latest/?badge=latest
+    :target: https://falcon-authentication.readthedocs.io/en/latest/?badge=latest
 
-.. |version| image:: https://img.shields.io/pypi/v/falcon-auth.svg
-    :target: https://pypi.python.org/pypi/falcon-auth
+.. |version| image:: https://img.shields.io/pypi/v/falcon-authentication.svg
+    :target: https://pypi.python.org/pypi/falcon-authentication
 
 .. |license| image:: http://img.shields.io/:license-mit-blue.svg
-    :target: https://pypi.python.org/pypi/falcon-auth/
+    :target: https://pypi.python.org/pypi/falcon-authentication/
 
-.. |build| image:: https://travis-ci.org/loanzen/falcon-auth.svg?branch=master
-    :target: https://travis-ci.org/loanzen/falcon-auth
+.. |build| image:: https://travis-ci.org/loanzen/falcon-authentication.svg?branch=master
+    :target: https://travis-ci.org/loanzen/falcon-authentication
 
-.. |coverage| image:: https://coveralls.io/repos/github/loanzen/falcon-auth/badge.svg?branch=master
-    :target: https://coveralls.io/github/loanzen/falcon-auth?branch=master
+.. |coverage| image:: https://coveralls.io/repos/github/loanzen/falcon-authentication/badge.svg?branch=master
+    :target: https://coveralls.io/github/loanzen/falcon-authentication?branch=master

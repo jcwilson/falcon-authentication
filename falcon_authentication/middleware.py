@@ -5,7 +5,7 @@ from __future__ import division
 
 import falcon
 
-from falcon_auth.backends import AuthBackend, BackendAuthenticationFailure
+from falcon_authentication.backends import AuthBackend, BackendAuthenticationFailure
 
 
 class FalconAuthMiddleware(object):
@@ -22,8 +22,8 @@ class FalconAuthMiddleware(object):
     othewise an ``falcon.HTTPUnauthorized`` exception is raised.
 
     Args:
-        backend(:class:`falcon_auth.backends.AuthBackend`, required): Specifies the auth
-            backend to be used to authenticate requests
+        backend(:class:`falcon_authentication.backends.AuthBackend`, required): Specifies
+            the auth backend to be used to authenticate requests
 
         exempt_routes(list, optional): A list of paths to be excluded while performing
             authentication. Default is ``None``
