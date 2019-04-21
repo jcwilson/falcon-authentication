@@ -11,7 +11,7 @@ import falcon
 
 try:
     # This is an optional dependency. To use JWTAuthBackend be sure to add
-    # [backend-jwt] to your falcon-auth requirement.
+    # [backend-jwt] to your falcon-authentication requirement.
     # See https://www.python.org/dev/peps/pep-0508/#extras
     import jwt
 except ImportError:
@@ -19,13 +19,13 @@ except ImportError:
 
 try:
     # This is an optional dependency. To use AuthBackend be sure to add
-    # [backend-hawk] to your falcon-auth requirement.
+    # [backend-hawk] to your falcon-authentication requirement.
     # See https://www.python.org/dev/peps/pep-0508/#extras
     import mohawk
 except ImportError:
     pass
 
-from falcon_auth.serializer import ExtendedJSONEncoder
+from falcon_authentication.serializer import ExtendedJSONEncoder
 
 
 class BackendAuthenticationFailure(falcon.HTTPUnauthorized):
@@ -353,7 +353,7 @@ class JWTAuthBackend(AuthBackend):
         try:
             jwt
         except NameError:
-            raise ImportError('Optional dependency falcon-auth[backend-jwt] not installed')
+            raise ImportError('Optional dependency falcon-authentication[backend-jwt] not installed')
 
         super(JWTAuthBackend, self).__init__(user_loader)
         self.secret_key = secret_key
@@ -468,7 +468,7 @@ class HawkAuthBackend(AuthBackend):
         try:
             mohawk
         except NameError:
-            raise ImportError('Optional dependency falcon-auth[backend-hawk] not installed')
+            raise ImportError('Optional dependency falcon-authentication[backend-hawk] not installed')
         super(HawkAuthBackend, self).__init__(user_loader)
         self.auth_header_prefix = 'Hawk'
         self.load_credentials = credentials_loader

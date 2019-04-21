@@ -13,11 +13,11 @@ import falcon
 import pytest
 from falcon import testing
 
-from falcon_auth.backends import AuthBackend, BasicAuthBackend, TokenAuthBackend, \
+from falcon_authentication.backends import AuthBackend, BasicAuthBackend, TokenAuthBackend, \
     JWTAuthBackend, NoneAuthBackend, MultiAuthBackend, HawkAuthBackend, \
     BackendAuthenticationFailure, BackendNotApplicable, UserNotFound
-from falcon_auth.middleware import FalconAuthMiddleware
-from falcon_auth.serializer import ExtendedJSONEncoder
+from falcon_authentication.middleware import FalconAuthMiddleware
+from falcon_authentication.serializer import ExtendedJSONEncoder
 
 try:
     import jwt
