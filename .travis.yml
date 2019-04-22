@@ -2,33 +2,16 @@ language: python
 
 matrix:
   include:
-\    - python: 2.7
-      env:
-        - WITH_JWT=true
-          WITH_HAWK=true
+    - python: 2.7
     - python: 3.4
-      env:
-        - WITH_JWT=true
-          WITH_HAWK=true
     - python: 3.5
-      env:
-        - WITH_JWT=true
-          WITH_HAWK=true
     - python: 3.6
-      env:
-        - WITH_JWT=true
-          WITH_HAWK=true
     - python: 3.7
       dist: xenial
-      env:
-        - WITH_JWT=true
-          WITH_HAWK=true
 
 install:
   - "[[ -n \"$SETUPTOOLS\" ]] && pip install \"$SETUPTOOLS\" || true"
   - "pip install -r requirements-dev.txt"
-  - "\"$WITH_JWT\" && pip install \"pyjwt>=1.7.0,<2.0.0\" || true"
-  - "\"$WITH_HAWK\" && pip install \"mohawk>=1.0.0,<2.0.0\" || true"
 
 script:
   - py.test --cov-report term-missing --cov=falcon_authentication
