@@ -46,8 +46,8 @@ setup(
         'falcon'
     ],
     extras_require={
-        'backend-hawk': ['mohawk>=1.0.0,<2.0.0'],
-        'backend-jwt': ['pyjwt>=1.7.1,<2.0.0']
+        'backend-hawk': ['mohawk~=1.0'],
+        'backend-jwt': ['pyjwt~=1.7']
     },
     license='MIT',
     name='falcon-authentication',
@@ -57,13 +57,13 @@ setup(
     scripts=[],
     test_suite='tests',
     tests_require=[
-        'pytest>=3.0.7,<4.0.0',
-        'pytest-cov>=2.4.0,<3.0.0',
-        'pytest-mock>=1.6.0,<2.0.0',
-        'codecov>=2.0.3,<3.0.0',
-        'coverage>=4.0.3,<5.0.0',
-        'tox>=2.3.1,<3.0.0',
-        'python-coveralls>=2.9.1,<3.0.0'
+        'pytest<3.3.0',
+        'pytest-cov~=2.4',
+        'pytest-mock~=1.6',
+        'codecov~=2.0',
+        'coverage~=4.0',
+        'tox~=2.3',
+        'python-coveralls~=2.9',
     ],
     url='https://github.com/jcwilson/falcon-authentication',
     version=version,
