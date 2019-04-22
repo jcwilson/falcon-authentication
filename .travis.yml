@@ -16,5 +16,5 @@ install:
 script:
   - py.test --cov-report term-missing --cov=falcon_authentication
 
-# after_success:
-#   - coveralls
+after_success:
+  - coveralls

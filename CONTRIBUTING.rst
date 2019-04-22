@@ -35,16 +35,16 @@ Feature Requests
 I'm always looking for suggestions to improve this project. If you have a
 suggestion for improving an existing feature, or would like to suggest a
 completely new feature, please file an issue with my
-`Github repository <https://github.com/loanzen/falcon-authentication/issues>`__
+`Github repository <https://github.com/jcwilson/falcon-authentication/issues>`__
 
 Bug Reports
 -----------
 
-You may file bug reports on `Github Issues <https://github.com/loanzen/falcon-authentication/issues>`__
+You may file bug reports on `Github Issues <https://github.com/jcwilson/falcon-authentication/issues>`__
 
 Pull Requests
 -------------
 
 Along with my desire to hear your feedback and suggestions,
 I'm also interested in accepting direct assistance in the form of new code or documentation.
-Please feel free to file pull requests against my `Github repository <https://github.com/loanzen/falcon-authentication/issues>`__
+Please feel free to file pull requests against my `Github repository <https://github.com/jcwilson/falcon-authentication/issues>`__

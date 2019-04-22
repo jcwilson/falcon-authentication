@@ -264,20 +264,19 @@ API
 .. autoclass:: falcon_authentication.MultiAuthBackend
     :members:
 
-
-.. |docs| image:: https://readthedocs.org/projects/docs/badge/?version=latest
-    :alt: Documentation Status
-    :scale: 100%
-    :target: https://falcon-authentication.readthedocs.io/en/latest/?badge=latest
+.. |docs| image:: https://readthedocs.org/projects/falcon-authentication/badge/?version=latest
+  :target: https://falcon-authentication.readthedocs.io/en/latest
+  :alt: Documentation status
 
 .. |version| image:: https://img.shields.io/pypi/v/falcon-authentication.svg
     :target: https://pypi.python.org/pypi/falcon-authentication
+    :alt: Build version
 
 .. |license| image:: http://img.shields.io/:license-mit-blue.svg
     :target: https://pypi.python.org/pypi/falcon-authentication/
 
-.. |build| image:: https://travis-ci.org/loanzen/falcon-authentication.svg?branch=master
-    :target: https://travis-ci.org/loanzen/falcon-authentication
+.. |build| image:: https://travis-ci.org/jcwilson/falcon-authentication.svg?branch=fork
+    :target: https://travis-ci.org/jcwilson/falcon-authentication
 
-.. |coverage| image:: https://coveralls.io/repos/github/loanzen/falcon-authentication/badge.svg?branch=master
-    :target: https://coveralls.io/github/loanzen/falcon-authentication?branch=master
+.. |coverage| image:: https://coveralls.io/repos/github/jcwilson/falcon-authentication/badge.svg?branch=master
+    :target: https://coveralls.io/github/jcwilson/falcon-authentication?branch=master
